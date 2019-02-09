@@ -1,0 +1,83 @@
+﻿@model SitefinityWebApp.Mvc.Models.IndexViewModel
+
+<h1>Events</h1>
+
+<div class="clearfix">
+    <div class="col-md-8">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Content</th>
+                    <th>Details</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.EventItems)
+                {
+                    <tr>
+                        <td>@Html.Raw(item.Title)</td>
+                        <td>@Html.Raw(item.EventStart.ToString())</td>
+                        <td>@Html.Raw(item.EventEnd.ToString())</td>
+                        <td>@Html.Raw(item.Content)</td>
+                        <td>@Html.ActionLink("Details", "Detail", new { urlName = item.UrlName })</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-2 col-md-offset-1">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.FilterDate, htmlAttributes: new { @class = "control-label" })
+                    @Html.EditorFor(model => model.FilterDate, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.FilterDate, "", new { @class = "text-danger" })
+                    <div>
+                        <input type="submit" value="Ok" class="btn btn-info btn-xs" style="float: right;" />
+                    </div>
+                </div>
+            </div>
+        }
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @*Creates a dropdown list with the available calendars.
+            The chosen item binds to the model CalendarName property. *@
+            <div class="form-horizontal">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CalendarName, htmlAttributes: new { @class = "control-label" })
+                    @Html.EnumDropDownListFor(model => model.CalendarName, "Select", htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.CalendarName, "", new { @class = "text-danger" })
+                    <input type="submit" value="Ok" class="btn btn-info btn-xs" style="float: right;" />
+                </div>
+            </div>
+        }
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            @*Creates a dropdown list with the available order options.
+            The chosen item binds to the model OrderBy property. *@
+            <div class="form-horizontal">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.OrderBy, htmlAttributes: new { @class = "control-label" })
+                    @Html.EnumDropDownListFor(model => model.OrderBy, "Select", htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.OrderBy, "", new { @class = "text-danger" })
+                    <div>
+                        <input type="submit" value="Ok" class="btn btn-info btn-xs" style="float: right;" />
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
