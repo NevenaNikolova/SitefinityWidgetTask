@@ -7,11 +7,14 @@ Create an MVC widget to display the events.
 The widget should be able to display the events filtered by: 
 - Calendar 
 - Start date 
-Bonus:  Implement sorting options in the widget. 
+
+Bonus:  
+Implement sorting options in the widget. 
 The sorting options should include: 
 1. Start date 
 2. End date 
 3. Title 
+
 Part 2:
 Prepare written documentation about the approach for solving the task in Part 1 
 
