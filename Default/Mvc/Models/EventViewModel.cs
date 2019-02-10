@@ -8,6 +8,7 @@ namespace SitefinityWebApp.Mvc.Models
     /// <summary>
     /// This class is a View Model for Sitefinity`s Event and
     /// represents the events to the user with the properties specified in the model.
+    /// The model validation is configured by attributes. 
     /// </summary>
     public class EventViewModel
     {

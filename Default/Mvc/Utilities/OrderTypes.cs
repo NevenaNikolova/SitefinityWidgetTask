@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace SitefinityWebApp.Mvc.Utilities
-{
+{/// <summary>
+/// Enumeration for the ordering options, used for creating a dropdown list in the Index View.
+/// </summary>
     public enum OrderTypes
     {
         [Display(Name ="Start Date")]

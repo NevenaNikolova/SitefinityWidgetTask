@@ -1,8 +1,13 @@
 ﻿@model SitefinityWebApp.Mvc.Models.IndexViewModel
 
+@*This is the start View which presents the 10 events in a table format.
+    Three forms are included for filtering by date,
+    filtering by calendar and ordering the results.
+*@
 <h1>Events</h1>
-
+@*Clears the floats of the child elements*@
 <div class="clearfix">
+    @*Sets the table in 8 Bootstrap columns*@
     <div class="col-md-8">
         <table class="table table-striped">
             <thead>
@@ -15,6 +20,11 @@
                 </tr>
             </thead>
             <tbody>
+                @*
+                    Html attributes are used to present the data for each event in the model.
+                        The .ActionLink uses the event`UrlName as routing value and
+                        maps to the detailed View of the event.
+                *@
                 @foreach (var item in Model.EventItems)
                 {
                     <tr>
@@ -28,7 +38,10 @@
             </tbody>
         </table>
     </div>
+    @*Sets the forms with size of 2 Bootstrap columns and 1 column padding*@
     <div class="col-md-2 col-md-offset-1">
+        @*This form represents a dropdown calendar from which the user can choose a date.
+            The chosen date binds to the model.FilterDate property.*@
         @using (Html.BeginForm())
         {
             @Html.AntiForgeryToken()
@@ -48,8 +61,8 @@
         @using (Html.BeginForm())
         {
             @Html.AntiForgeryToken()
-            @*Creates a dropdown list with the available calendars.
-            The chosen item binds to the model CalendarName property. *@
+            @*Creates a dropdown list from the CalendarNames enumeration.
+                The chosen item binds to the model CalendarName property. *@
             <div class="form-horizontal">
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <div class="form-group">
@@ -64,8 +77,8 @@
         {
             @Html.AntiForgeryToken()
 
-            @*Creates a dropdown list with the available order options.
-            The chosen item binds to the model OrderBy property. *@
+            @*Creates a dropdown list from the OrderTypes enumeration.
+                The chosen item binds to the model OrderBy property. *@
             <div class="form-horizontal">
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <div class="form-group">

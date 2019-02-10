@@ -1,18 +1,13 @@
 ﻿using SitefinityWebApp.Mvc.Utilities;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Web;
-using System.Web.Mvc;
 
 namespace SitefinityWebApp.Mvc.Models
 {/// <summary>
 /// This class is a View Model which represents the collection of events 
 /// that will be presented to the user. The properties for ordering and filtration
-/// are nullable and the class has two constructors 
-/// which allowes it to work with or without filtration and ordering.
+/// are nullable. The model validation is configured by attributes.
 /// </summary>
     public class IndexViewModel
     {

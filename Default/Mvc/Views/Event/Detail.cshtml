@@ -1,4 +1,8 @@
 ﻿@model SitefinityWebApp.Mvc.Models.EventViewModel
+
+@*This is a strongly typed View, bind to Event View Model,
+    displaying in a table format the details for a specific event.
+*@
 <h3 style="font-size:30px; font-weight:bold;">
     @Html.Raw(Model.Title)
 </h3>
@@ -39,7 +43,7 @@
             </tr>
         </tbody>
     </table>
-    <br/>
+    <br />
     <div>
         @Html.ActionLink("Back to List", "Index")
     </div>
