@@ -11,7 +11,8 @@ namespace SitefinityWebApp.Mvc.Utilities
 {/// <summary>
 /// This class contains a method which creates the 10 events and assigns them to the 2 calendars.
 /// The internal access modifier makes it visible only in the current assembly.
-/// The method is declared as static as it does not return anything.
+/// The method is declared as static void as it is used only to create the 10 events and does 
+/// not need to have any instances.
 /// </summary>
     internal class CustomEvents
     {
@@ -51,7 +52,7 @@ namespace SitefinityWebApp.Mvc.Utilities
                 current.UrlName = Regex.Replace(current.Title.ToLower(), @"[^\w\-\!\$\'\(\)\=\@\d_]+", "-");
                 current.PublicationDate = DateTime.Today;
 
-                //Assigns events to calendars
+                //Assigns events to calendars                
                 if (current.EventStart.Day % 2 == 0)
                 {
                     current.Parent = evenCalendar;

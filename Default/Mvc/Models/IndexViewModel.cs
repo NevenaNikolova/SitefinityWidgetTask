@@ -7,7 +7,7 @@ namespace SitefinityWebApp.Mvc.Models
 {/// <summary>
 /// This class is a View Model which represents the collection of events 
 /// that will be presented to the user. The properties for ordering and filtration
-/// are nullable. The model validation is configured by attributes.
+/// are nullable as they are optional. The model validation is configured by attributes.
 /// </summary>
     public class IndexViewModel
     {

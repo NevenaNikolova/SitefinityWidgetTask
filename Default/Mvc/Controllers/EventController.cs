@@ -31,9 +31,11 @@ namespace SitefinityWebApp.Mvc.Controllers
         /// This is the default action. 
         /// It queries the events first by the two calendars.
         /// If there are no events registered in the calendars, 
-        /// the method calls the internal static class which creates the 10 events.
-        /// The query continues with the nullable parameters for filtering and ordering 
-        /// the results and returns the Index View with the Index View Model.
+        /// the method calls the internal static class which creates the 10 events
+        /// and assigns them to the calendars.
+        /// The expression continues with querying the data
+        /// according to the passed nullable parameters for filtering and ordering 
+        /// and then returns the Index View with the Index View Model.
         /// </summary>
     
         public ActionResult Index(DateTime? filterDate, int? calendarName, int? orderBy)
@@ -46,20 +48,24 @@ namespace SitefinityWebApp.Mvc.Controllers
             {
                 CustomEvents.CreateEvents();
             }
-            // Queries only the events which are visible and have Live status
+            // Queries only the events which are Visible and have Live status
             events = events.Where(ev => ev.Visible == true)
                           .Where(ev => ev.Status == ContentLifecycleStatus.Live);
+
+            //The query expression filters the data by date if such is passed as a parameter.
             if (filterDate != null)
             {
                 events = events.Where(ev => ev.EventStart == filterDate) ??
                     throw new ArgumentNullException(Constants.NoEvents);
                 TempData["Message"] = Constants.NoEvents;
             }
+            //The query expression filters the data by calendar if a calendar is passed as a parameter.
             if (calendarName != null)
             {
                 var calendar = Enum.GetName(typeof(CalendarNames), calendarName);
                 events = events.Where(ev => ev.Parent.Title.Contains(calendar));
             }
+            //The query expression orders the events if an ordering parameter is passed.
             if (orderBy != null)
             {
                 switch (orderBy)
@@ -71,12 +77,13 @@ namespace SitefinityWebApp.Mvc.Controllers
                         break;
                 }
             }
+            //Creates IndexViewModel of the events and return Index View with it.
             var eventsModel = events.Select(ev => new EventViewModel(ev));
             var model = new IndexViewModel(eventsModel);
             return View("Index", model);
         }
         /// <summary>
-        /// This action uses urlName parameter of the event which is bind from the Index View.
+        /// This action uses urlName parameter of the event which is passed from the Index View.
         /// It makes a query with .SingleOrDefault() as there should be only one event with the
         /// specific url and returns a detailed View with an EventViewModel.
         /// If the event is not found the method throws ArgumentNullException.
